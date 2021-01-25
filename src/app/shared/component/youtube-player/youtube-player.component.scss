@@ -1,0 +1,12 @@
+.example-card {
+  max-width: 640px;
+}
+
+.example-header-image {
+  background-size: cover;
+}
+
+mat-card-content {
+  max-height: 100px;
+  overflow: hidden;
+}

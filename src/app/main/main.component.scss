@@ -1,0 +1,9 @@
+.video-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+
+  app-youtube-player {
+    margin-bottom: 30px;
+  }
+}

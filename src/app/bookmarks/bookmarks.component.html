@@ -1,0 +1,8 @@
+<ng-container *ngLet="bookmarkList$ | async as bookmarks">
+    <div class="video-list">
+        <app-youtube-player
+                *ngFor="let video of bookmarks?.items"
+                [video]="video"
+        ></app-youtube-player>
+    </div>
+</ng-container>
