@@ -1,8 +1,16 @@
 <ng-container *ngLet="bookmarkList$ | async as bookmarks">
     <div class="video-list">
-        <app-youtube-player
-                *ngFor="let video of bookmarks?.items"
-                [video]="video"
-        ></app-youtube-player>
+        <ng-container *ngIf="bookmarks && bookmarks.items?.length">
+            <app-youtube-player
+                    *ngFor="let video of bookmarks.items"
+                    [video]="video"
+                    [bookmarks]="bookmarks.items.includes(video.id)"
+            ></app-youtube-player>
+        </ng-container>
+        <ng-container *ngIf="bookmarks && bookmarks.notFoundItems">
+            <div class="not-found-id" *ngFor="let item of bookmarks.notFoundItems">
+                <span>Video witch id: <b>{{item}}</b> not founded</span>
+            </div>
+        </ng-container>
     </div>
 </ng-container>

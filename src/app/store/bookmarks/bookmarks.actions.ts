@@ -5,6 +5,11 @@ export namespace Bookmarks {
     constructor(public payload: string) {}
   }
 
+  export class ChangeBookmarks {
+    static readonly type = '[BookMarks] Update';
+    constructor(public payload: string) {}
+  }
+
   export class RemoveFromBookmarks {
     static readonly type = '[BookMarks] Remove';
     constructor(public payload: string) {}

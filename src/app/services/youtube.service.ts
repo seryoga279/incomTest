@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpParams} from "@angular/common/http";
-import {Observable} from "rxjs";
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,13 +10,13 @@ export class YoutubeService {
   constructor(private http: HttpClient) { }
 
   private apiKey = 'AIzaSyBH4ouSr7KyZVJPCKyGYtUY2TlVVLbRdic';
-  private baseUrl = 'https://youtube.googleapis.com/youtube/v3'
+  private baseUrl = 'https://youtube.googleapis.com/youtube/v3';
 
   private getVideos(params: HttpParams): Observable<any> {
     return this.http.get(`${this.baseUrl}/videos`, {params});
   }
 
-  private searchVideo(params: HttpParams) {
+  private searchVideo(params: HttpParams): Observable<any> {
     return this.http.get(`${this.baseUrl}/search`, {params});
   }
 
@@ -35,7 +35,7 @@ export class YoutubeService {
   }
 
   getVideosById(ids: string[]): Observable<any> {
-    let params = new HttpParams()
+    const params = new HttpParams()
         .append('part', 'snippet,contentDetails,statistics')
         .append('id', ids.toString())
         .append('key', this.apiKey);

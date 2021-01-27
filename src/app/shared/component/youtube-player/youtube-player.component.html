@@ -1,6 +1,7 @@
 <mat-card class="example-card">
     <mat-card-header>
-        <div mat-card-avatar class="example-header-image" [ngStyle]="{'background-image': 'url(' + video.snippet.thumbnails.default.url + ')'}"></div>
+        <div mat-card-avatar class="example-header-image"
+             [ngStyle]="{'background-image': 'url(' + video.snippet.thumbnails.default.url + ')'}"></div>
         <mat-card-title>{{video.snippet.channelTitle}}</mat-card-title>
         <mat-card-subtitle>{{video.snippet.title}}</mat-card-subtitle>
     </mat-card-header>
@@ -9,9 +10,9 @@
         <span>{{video.snippet.description}}</span>
     </mat-card-content>
     <mat-card-actions>
-        <button mat-button *ngIf="(bookmarkList$ | async).includes(video.id); else addButton" (click)="removeFromBookmarks(video.id)">remove from bookmarks</button>
+        <button mat-button *ngIf="bookmarks; else addButton" (click)="removeFromBookmarks()">remove from bookmarks</button>
         <ng-template #addButton>
-            <button mat-button (click)="addToBookmarks(video.id)">to bookmarks</button>
+            <button mat-button (click)="addToBookmarks()">to bookmarks</button>
         </ng-template>
     </mat-card-actions>
 </mat-card>

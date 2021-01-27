@@ -8,3 +8,11 @@
 :host {
   width: 100%;
 }
+
+mat-toolbar {
+  margin-bottom: 40px;
+
+  mat-form-field {
+    margin-right: 15px
+  }
+}

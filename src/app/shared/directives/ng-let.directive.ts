@@ -1,4 +1,4 @@
-import {Directive, Inject, Input, TemplateRef, ViewContainerRef} from '@angular/core';
+import { Directive, Inject, Input, TemplateRef, ViewContainerRef } from '@angular/core';
 
 export class LetContext<T> {
   constructor(private readonly dir: LetDirective<T>) {}

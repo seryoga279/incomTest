@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthState} from "../store/auth/auth-state.service";
-import {mergeMap, takeUntil, tap} from "rxjs/operators";
-import {Store} from "@ngxs/store";
-import {UnsubscribeComponent} from "../shared/component/unsubscribe/unsubscribe.component";
-import {YoutubeService} from "../services/youtube.service";
-import {EMPTY, of} from "rxjs";
+import { BookmarksState } from '../store/bookmarks/bookmarks.service';
+import { map, mergeMap, takeUntil } from 'rxjs/operators';
+import { Store } from '@ngxs/store';
+import { UnsubscribeComponent } from '../shared/component/unsubscribe/unsubscribe.component';
+import { YoutubeService } from '../services/youtube.service';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-bookmarks',
@@ -13,9 +13,14 @@ import {EMPTY, of} from "rxjs";
 })
 export class BookmarksComponent extends UnsubscribeComponent implements OnInit {
 
-  bookmarkList$ = this.store.select(AuthState.bookmarksList)
+  bookmarkList$ = this.store.select(BookmarksState.bookmarksList)
       .pipe(
-          mergeMap((videos: string[]) => videos.length ? this.youtubeService.getVideosById(videos) : of(videos)),
+          mergeMap((videos: string[]) => videos.length ? this.youtubeService.getVideosById(videos).pipe(
+              map((res: any) => {
+                res.notFoundItems = videos.filter((x: string) => res.items.map((item: any) => item.id).indexOf(x) === -1);
+                return res;
+              })
+          ) : of(videos)),
           takeUntil(this.unsubscribe)
       );
 

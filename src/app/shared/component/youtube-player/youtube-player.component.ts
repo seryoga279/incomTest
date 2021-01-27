@@ -1,20 +1,18 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Store} from "@ngxs/store";
-import {Bookmarks} from "../../../store/auth/auth-state.actions";
-import {AuthState} from "../../../store/auth/auth-state.service";
-import {UnsubscribeComponent} from "../unsubscribe/unsubscribe.component";
-import {takeUntil} from "rxjs/operators";
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { Store } from '@ngxs/store';
+import { UnsubscribeComponent } from '../unsubscribe/unsubscribe.component';
+import { Bookmarks } from '../../../store/bookmarks/bookmarks.actions';
 
 @Component({
   selector: 'app-youtube-player',
   templateUrl: './youtube-player.component.html',
-  styleUrls: ['./youtube-player.component.scss']
+  styleUrls: ['./youtube-player.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class YoutubePlayerComponent extends UnsubscribeComponent implements OnInit {
 
   @Input() video: any;
-  bookmarkList$ = this.store.select(AuthState.bookmarksList)
-      .pipe(takeUntil(this.unsubscribe));
+  @Input() bookmarks: boolean;
 
   constructor(private store: Store) {
     super();
@@ -23,12 +21,12 @@ export class YoutubePlayerComponent extends UnsubscribeComponent implements OnIn
   ngOnInit(): void {
   }
 
-  addToBookmarks(id: string) {
-    this.store.dispatch(new Bookmarks.AddToBookmarks(id));
+  addToBookmarks(): any {
+    this.store.dispatch(new Bookmarks.AddToBookmarks(this.video.id.videoId || this.video.id));
   }
 
-  removeFromBookmarks(id: string) {
-    this.store.dispatch(new Bookmarks.RemoveFromBookmarks(id));
+  removeFromBookmarks(): any {
+    this.store.dispatch(new Bookmarks.RemoveFromBookmarks(this.video.id.videoId || this.video.id));
   }
 
 }

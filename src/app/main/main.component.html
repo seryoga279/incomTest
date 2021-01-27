@@ -1,8 +1,9 @@
-<ng-container *ngIf="videoList">
-        <div class="video-list">
+<ng-container *ngLet="videoList$ | async as videoList">
+        <div class="video-list" *ngIf="videoList && videoList.length">
                 <app-youtube-player
                         *ngFor="let video of videoList"
                         [video]="video"
+                        [bookmarks]="bookMarksList.includes(video?.id)"
                 ></app-youtube-player>
         </div>
 </ng-container>

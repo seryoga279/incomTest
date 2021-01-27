@@ -1,11 +1,11 @@
-<mat-toolbar color="primary" style="margin-bottom: 40px">
+<mat-toolbar color="primary">
     <mat-toolbar-row>
         <a style="color: black" [routerLink]="['/']">Incoma videoList</a>
         <span class="example-spacer"></span>
-        <mat-form-field [formGroup]="form" style="margin-right: 15px">
+        <mat-form-field [formGroup]="form">
             <input formControlName="query" matInput placeholder="search video">
         </mat-form-field>
-        <button [routerLink]="['bookmarks']" mat-raised-button>Bookmarks {{(bookmarkList$ | async).length || ''}}</button>
+        <button [routerLink]="['bookmarks']" mat-raised-button>Bookmarks {{(bookmarkList$ | async)?.length || ''}}</button>
     </mat-toolbar-row>
 </mat-toolbar>
 <router-outlet></router-outlet>

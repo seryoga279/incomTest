@@ -1,3 +1,3 @@
 export interface BookmarksStateInterface {
-  videos: string[]
+  videos: string[];
 }
